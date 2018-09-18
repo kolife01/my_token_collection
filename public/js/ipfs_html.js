@@ -1,0 +1,7 @@
+
+function ipfs_html(url_1){
+
+  const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="My Token Collection"><meta name="twitter:description" content="You can host your TokenCollection in IPFS, and give short link for it"><meta name="twitter:image" content="'+ url_1 +'"><title>MyTokenCollection</title><style>.img,.img_box{width:600px}a{vertical-align:baseline;background:0 0}.title{color:#333;text-decoration:none}.wrap{max-width:600px;margin:auto}.img_box{margin:20px auto auto}@media (max-width:600px){.wrap{max-width:300px;margin:auto}h1{font-size:20px}.img_box{width:300px;margin:20px auto auto}.img{width:300px;height:157px;margin:auto}}</style></head><body><div class="wrap"><h1><a class="title" href="https://token-collection.firebaseapp.com">My Token Collection</a></h1><div class="img_box"><img class="img" src="'+ url_1 +'" alt=""></div><p>Show off your token in the collection...</p><p><a href="https://token-collection.firebaseapp.com">https://token-collection.firebaseapp.com</a></p><a href="//twitter.com/share" class="twitter-share-button" data-text="MyTokenCollection like this one are taking off... #MyTokenCollection @kolife01" data-url="" data-lang="en"></a></div><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></body></html>';
+  
+  return html;
+}

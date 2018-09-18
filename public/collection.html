@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="My Token Collection"/>
+    <meta name="twitter:description" content="Collection page"/>
+    <meta name="twitter:image" content="https://ipfs.io/ipfs/Qmde9EynmU2faRr6fFx7sfYn5ojB5tjqQZCG4d5rhXoA6v" >
+    
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script language="javascript" type="text/javascript" src="./js/web3.min.js"></script>
+    <script language="javascript" type="text/javascript" src="./js/contract_abi.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+   
+    <title>MyTokenCollection</title>
+</head>
+<body>
+<div id="body_wrap">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html">MyTokenCollection</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="https://opensea.io/category/mytokencollection">Market</a>
+					          </li>		
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div id="main">
+        <div id="output"></div>
+        <canvas id="token_canvas" style="display: none"></canvas>
+        <div>
+            <img id="result2" src="" alt="" style="display: none">
+        </div>
+        <div>
+            <button id="shot" class="btn btn-xl">Collect</button>
+        </div>
+    </div>
+
+
+
+    <div id="dev" style="display: none;">
+        <p id="message"></p>
+        <p><a src="" id="link">ipfs_image</a></p>
+        <p><a src="" id="link2">ipfs_uri</a></p>
+        <p><a src="" id="link3">ipfs_url</a></p>
+    </div>
+    
+
+
+    <!-- モーダルウィンドウ -->
+    <div class="modal" id="modal01">
+        <!-- モーダルウィンドウが開いている時のオーバーレイ -->
+        <div class="overLay modalClose"></div>
+        <!-- モーダルウィンドウの中身 -->
+        <div class="inner" id="preview"></div>
+    </div>
+
+</div>
+    
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootbox.min.js"></script>
+<!-- Token Collection -->
+<script src="js/buffer.js"></script>
+<script src="js/ipfs.js"></script>
+<script src="js/ipfs_html.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script>
+
+   
+
+
+    let userAccount;
+
+    async function startApp(){
+        // var contractAddress = "0x47b7C92e2f14C83645075edB56527534E0D31782";
+        var contractAddress = "0xC3d3916FAe7C2b7519C79Fa3A09E08FB1F42a800";
+        contract = new web3js.eth.Contract(contractABI, contractAddress);
+        const result = await sampleResolve();
+        await getToken(result);
+    };
+
+    function sampleResolve(userAccount) {
+        return new Promise(resolve => {
+            web3.eth.getAccounts((error, accounts) => {
+                if (accounts[0] !== userAccount) {
+                    userAccount = accounts[0];
+                    // console.log(userAccount);
+                    // userAccount = "";
+                    resolve(userAccount);
+                };
+            });  
+        });
+    };
+
+//スマートコントラクト部
+    $(document).on("click", "#confirm", function () {
+        token(); 
+    });
+
+    async function token(account){
+        const result = await sampleResolve();
+        const url = await ipfs_test(result);
+       
+        contract.methods.mintTokenCollection(url)
+            .send({ from: result, gasLimit: "340000" })
+            .on("transactionHash", function (_receipt) {
+                alert("Now your Token Collection is being published. txhash:" + _receipt);
+                console.log("txhash: " + _receipt)
+            })
+            .on("receipt", function (_receipt) {
+                console.log(_receipt);
+            })
+            .on("error", function (_error) {
+                console.log(_error);
+            })
+    };
+
+
+
+    
+
+
+//トークンimage取得
+    function getToken(val) {
+        let url = 'https://api.opensea.io/api/v1/assets/?owner=' + val;
+
+        $.getJSON(url, 
+            function(data) {
+                console.log(data.assets)
+
+                for(let i =0; i<data.assets.length; i++){
+                    var img = data.assets[i].image_url;
+
+                    var sticky = $('<div id="' + i +'" class="sticky" ><div class="delete">×</div><img class="token_img"  src="'+ img +'" alt="" crossorigin="anonymous"></div>');
+                    sticky.appendTo('#output')
+                        .draggable();
+                }
+        });
+    };
+
+
+    $(document).on("click", ".delete", function () {
+        $('.sticky').removeClass('selected');
+        $(this).parent().addClass('selected');
+        $('.selected').remove();
+    });
+
+    
+
+//コレクション
+    $(document).on("click", "#shot", function () {
+        collect();
+    });
+
+    async function collect(){
+        await imgchange();
+        const url = await getimg2();
+        const url2 = await gettwimg(url);
+        preview(url2); 
+    }
+
+    
+
+//画像変換処理
+    //urlの画像をbase64に変換
+    function imgchange(){
+        $(".token_img").each(function(i, elem) {
+            var img2 = elem;
+            img2.crossOrigin = 'anonymous';
+            var b64 = ImageToBase64(img2, "image/png");
+            img2.src = b64;
+        });
+
+    };
+
+    function ImageToBase64(img, mime_type) {
+
+        var canvas = document.getElementById('token_canvas');
+
+        //imgの縦幅横幅を取得
+        var w = img.offsetWidth;
+        var h = img.offsetHeight;
+
+        //同じサイズをcanvasに指定
+        canvas.setAttribute("width", w);
+        canvas.setAttribute("height", h);
+
+        var ctx = canvas.getContext('2d');
+        
+        ctx.drawImage(img, 0, 0, w, h);
+        return canvas.toDataURL(mime_type);
+    };
+
+    function toBinary(canvas) {
+        var base64 = canvas.toDataURL('image/png'),
+            bin = atob(base64.replace(/^.*,/, '')),
+            buffer = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) {
+            buffer[i] = bin.charCodeAt(i);
+        }
+        return buffer;
+    };
+
+
+
+
+//IPFS登録
+    var ipfs = window.IpfsApi({ host: 'ipfs.infura.io', protocol: 'https' })
+    var link = document.getElementById("link");
+    var link2 = document.getElementById("link2");
+    var link3 = document.getElementById("link3");
+
+    //トークンコレクション画像生成
+    function getimg2(){
+        return new Promise(resolve => {
+        html2canvas(document.getElementById("output"),{
+            onrendered: function(canvas){
+            
+                $("#modal01").fadeIn();
+                $("#preview").append('<p id="uploading" style="color:white">Now uploading your Token Collection...</p>')
+                
+                var buf = buffer.Buffer(toBinary(canvas))
+
+                ipfs.add(buf, (err, result) => {
+                    
+                    imageHash = result[0].hash;
+                    var url = "https://ipfs.io/ipfs/" + imageHash;
+                    
+                    link.innerHTML = url;
+                    link.href = url;
+                    console.log("link1:" + url)
+                    resolve(url)
+
+                    $("#preview").append($('<img>').attr({
+                        id: "lastConfirm",
+                        src: url,
+                        width: 600,
+                        height: 314
+                        //レスポンシブ対応
+                    }));
+                });
+            }
+        })
+    });
+    };
+
+    //プレビュー表示設定
+    function preview(url){
+        var url1 = '<a type="button" class="btn btn-primary btn-block " style="cursor: pointer"  href="http://twitter.com/intent/tweet?&text=MyTokenCollection like this one are taking off... ' + url + ' @kolife01 %20&hashtags=MyTokenCollection&data-size=large">Tweet</a>';
+        
+        $("#uploading").text('Your Token Collection is ready! Please confirm transaction');
+        $("#preview").append('<br><br><button type="button" id="confirm" class="btn btn-success btn-block" style="cursor: pointer">Publish</button><button type="button" id="cancel" class="btn btn-light btn-block">Cancel</button><br>'+ url1)
+    }
+
+    
+    $(document).on("click", "#cancel", function () {
+        clearImage();
+    });
+
+    function clearImage() {
+        $("#preview").empty();
+        $("#modal01").fadeOut();
+    }
+
+    //ツイッター用IPFS作成
+    function gettwimg(url_1){
+        return new Promise(resolve => {
+
+            var html = ipfs_html(url_1);
+            
+            
+
+            var buf = buffer.Buffer(string_to_utf8_bytes(html));
+            ipfs.add(buf, (err, result) => {
+                    textHash = result[0].hash;
+                    var url = "https://ipfs.io/ipfs/" + textHash;
+                    link3.innerHTML = url;
+                    link3.href = url;
+                    console.log("link3:" + url)
+                    resolve(url)
+            })
+        })
+    }
+
+    
+
+
+//IPFSにトークンURIを登録
+    function ipfs_test(userAccount){
+        return new Promise(resolve => {
+        
+        var text2 = link.innerHTML;
+        var text3 = link3.innerHTML;
+        
+        var text ='{'
+        +'"name": "My token collection",'
+        +'"image": "' + text2 + '",'
+        + '"description": "Create by '+ userAccount +' html:' + text3 + '"'
+        +'}'  
+        
+        var buf = buffer.Buffer(string_to_utf8_bytes(text));
+        ipfs.add(buf, (err, result) => {
+                textHash = result[0].hash;
+                var url = "https://ipfs.io/ipfs/" + textHash;
+                message.innerHTML = "You can share your image by following link";
+                link2.innerHTML = url;
+                link2.href = url;
+                console.log("link2:" + url)
+                resolve(url)
+            });
+        })
+    }
+
+    function string_to_utf8_bytes(text){
+        var result = [];
+        if (text == null)
+            return result;
+        for (var i = 0; i < text.length; i++) {
+            var c = text.charCodeAt(i);
+            if (c <= 0x7f) {
+                result.push(c);
+            } else if (c <= 0x07ff) {
+                result.push(((c >> 6) & 0x1F) | 0xC0);
+                result.push((c & 0x3F) | 0x80);
+            } else {
+                result.push(((c >> 12) & 0x0F) | 0xE0);
+                result.push(((c >> 6) & 0x3F) | 0x80);
+                result.push((c & 0x3F) | 0x80);
+            }
+        }
+        return result;
+    }
+
+    
+
+
+
+    window.addEventListener('load', function () {
+            // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+            if (typeof web3 !== 'undefined') {
+                // Use Mist/MetaMask's provider
+                console.log("MetamaskOK")
+                web3js = new Web3(web3.currentProvider);
+            } else {
+                console.log("NG")
+                alert("Please start up the Metamask and connect to the Mainnet.")
+                // Handle the case where the user doesn't have Metamask installed
+                // Probably show them a message prompting them to install Metamask
+            }
+            // Now you can start your app & access web3 freely:
+            startApp()
+    })
+
+
+        // var tokenID = document.getElementById('tokenID');
+
+    // $(document).on("click", "#test", function () {
+    //     test(tokenID.value);
+    // });
+
+    // function test(_int){
+    //     contract.methods.tokenURI(_int).call().then(function (val) {
+    //             console.log('tokenURI', val);
+    //         });
+    // }
+    
+
+</script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>

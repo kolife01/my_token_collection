@@ -1,0 +1,242 @@
+/*---------- body ---------- */
+/* #body_wrap{
+  max-width: 1180px;
+  margin: auto;
+} */
+
+/*---------- navi ---------- */
+/* .nav_wrapper{
+  max-width: 1180px;
+  margin: auto;
+  padding: 15px 0;
+  margin: 0 0 20px 0;
+  border-bottom: solid 1px #333;
+}
+
+
+.nav_logo{
+ font-size: 20px;
+ margin: 0 0 0 20px;
+}
+
+.nav_menu{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav_menu a{
+  margin: 0 24px 0 0;
+  font-size: 12px;
+
+}
+
+.nav_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 0 0;
+}
+
+.nav_box a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.nav_box a::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #333;
+  transform: scale(0, 1);
+  transform-origin: right top;
+  transition: transform .3s;
+}
+.nav-box a:hover::after {
+  transform-origin: left top;
+  transform: scale(1, 1);
+} */
+
+/*---------- main ---------- */
+.sticky {
+  cursor: pointer;
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  
+}
+
+.token_img{
+  width: 150px;
+  height: 150px;
+}
+
+.delete{
+  right: 15px;
+  font-weight: bold;
+  font-size: 25px;
+  display: none;
+  position: absolute;
+}
+
+.sticky{
+  position: relative;
+}
+
+.sticky:hover .delete{
+  display: block;
+}
+
+
+
+
+#shot {
+  display: block;
+  width: 160px;
+  margin: auto;
+  padding: 0.8em;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 300px;
+  transition: .4s;
+  }
+
+
+#shot:hover {
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  }
+
+/*---------- Modal ---------- */
+
+  /* モーダルウィンドウのスタイル */
+
+  .modal {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+/* オーバーレイのスタイル */
+
+.overLay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.8;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+}
+
+/* モーダルウィンドウの中身のスタイル */
+
+.modal .inner {
+    position: absolute;
+    z-index: 11;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+/*---------- footer ---------- */
+.footer{
+  margin: 10px 0 0 0;
+  background-color: #707070;
+  padding: 18px 0;
+  text-align: center;
+}
+
+.copyrights{
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+#output{
+  height: 471px;
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  /* margin: 70px 20px 30px 20px; */
+  display: flex;
+  flex-wrap: wrap;
+  background-image: url("../img/gaku5_6.jpg");
+  /* background-size: contain; */
+  background-size: 900px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*---------- レスポンシブ ---------- */
+
+@media (max-width: 900px){
+      
+  #output {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 60px;
+    height: 350px;
+    background-size: 600px auto;
+  }
+
+  .sticky {
+    width: 100px;
+    height: 100px;
+  }
+
+  .token_img{
+    width: 100px;
+    height: 100px;
+  }
+
+  .delete{
+    right: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    display: none;
+    position: absolute;
+  }
+}
+
+@media (max-width: 600px){
+      
+  #output {
+    max-width: 300px;
+    margin: auto;
+    margin-top: 40px;
+    height: 230px;
+    background-size: 300px auto;
+  }
+
+  .sticky {
+    width: 50px;
+    height: 50px;
+  }
+
+  .token_img{
+    width: 50px;
+    height: 50px;
+  }
+
+  .delete{
+    right: 5px;
+    font-weight: bold;
+    font-size: 10px;
+    display: none;
+    position: absolute;
+  }
+}

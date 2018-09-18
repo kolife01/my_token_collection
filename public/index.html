@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91632900-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-91632900-4');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="My Token Collection"/>
+  <meta name="twitter:description" content="Show off your token in the collection"/>
+  <meta name="twitter:image" content="https://ipfs.io/ipfs/Qmde9EynmU2faRr6fFx7sfYn5ojB5tjqQZCG4d5rhXoA6v" >
+  <link rel="stylesheet" href="css/reset.css" type="text/css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+  <style>
+    .header-content{
+      padding: 100px 0 0 0;
+      position: relative;
+      width: 100%;
+      margin: 150px 0 150px 0;
+      height: 450px;
+      min-height: auto;
+      text-align: center;
+      color: #fff;
+      background-image: url(./img/header.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .header_title{
+        padding: 30px 0 0 0;
+    }
+
+    .header_text{
+      padding: 10px 0 20px 0;
+    }
+
+    #about{
+      margin-top: 30px;
+    }
+    .container{
+        padding: 100px 0 100px;
+    }
+    .btn {
+        border: 0;
+        border-radius: 300px;
+        text-transform: uppercase;
+        font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+        font-weight: 700;
+        margin-top: 30px;
+    }
+
+
+    .btn-xl {
+        padding: 15px 30px;
+    }
+
+
+    @media (max-width: 600px){
+      
+        header {
+        max-width: 300px;
+        margin: auto;
+        height: 350px;
+        }
+
+        .header-content{
+        height: 200px;
+        margin: 60px 0 0 0;
+        padding: 25px 0 0 0;
+        }
+        .header_title{
+        font-size: 34px;
+        }
+        
+        h2{
+        font-size: 20px;
+        }
+
+        .header_text{
+        color: #333;
+        padding: 10px 0 0 0;
+        }
+
+        .btn {
+            margin-top: 30px;
+            border: solid 1px #333;
+        }
+
+        .container{
+        padding: 60px 0 60px;
+        /* max-width: 900px; */
+        }
+
+    }
+  
+  </style>
+  
+  <title>MyTokenCollection</title>
+</head>
+<body>
+  <div class="wrap">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="">MyTokenCollection</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="collection.html">Collect</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="https://opensea.io/category/mytokencollection">Market</a>
+					          </li>		
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 class="header_title">Show off your token in the collection</h1>
+                <br>
+                <p class="header_text">You can publish your Token Collection as ERC721 token on Ethereum platform.</p>
+                <a href="collection.html" class="btn btn-default btn-xl page-scroll">Start Collection</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">How MyTokenCollection Works?</h2>
+                    <hr class="light">
+                    <p class="text-faded">MyTokenCollection is published on IPFS - InterPlanetary File System and associated to Ethereum ERC721 token
+                        which enables you own/sell/purchase published MyTokenCollection.</p>
+                    <p class="text-faded">Now it's time for you to publish "Your TokenCollection" on blockchain.</p>
+                    <a href="collection.html" class="btn btn-default btn-xl">Start Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p><a href="https://twitter.com/kolife01">Please feel free to contact me.</a></p>
+                    
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="//twitter.com/share" class="twitter-share-button" data-text="MyTokenCollection Show off your token in the collection... #MyTokenCollection  @kolife01" data-url="" data-lang="en"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+        
+    </div>
+
+    <div class="footer text-center" id="footer">
+        <small class="copyrights">copyrights 2018 My Token Collection All RIghts Reserved.</small>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script>
+</script>
+</body>
+</html>
