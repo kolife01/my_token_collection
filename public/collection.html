@@ -12,12 +12,8 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css">
-    <script language="javascript" type="text/javascript" src="./js/web3.min.js"></script>
-    <script language="javascript" type="text/javascript" src="./js/contract_abi.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    
    
     <title>MyTokenCollection</title>
 </head>
@@ -90,15 +86,21 @@
     </div>
 
 </div>
-    
 
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootbox.min.js"></script>
 <!-- Token Collection -->
+<script src="./js/web3.min.js"></script>
+<script src="./js/contract_abi.js"></script>
 <script src="js/buffer.js"></script>
 <script src="js/ipfs.js"></script>
 <script src="js/ipfs_html.js"></script>
+<!-- Twitter -->
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 
@@ -167,7 +169,7 @@
                 for(let i =0; i<data.assets.length; i++){
                     var img = data.assets[i].image_url;
 
-                    var sticky = $('<div id="' + i +'" class="sticky" ><div class="delete">×</div><img class="token_img"  src="'+ img +'" alt="" crossorigin="anonymous"></div>');
+                    var sticky = $('<div id="' + i +'" class="sticky" ><div class="delete">×</div><img class="token_img"  src="'+ img +'" alt="" crossorigin="anonymous"><div class="plus">+</div><div class="minus">-</div></div>');
                     sticky.appendTo('#output')
                         .draggable();
                 }
@@ -180,6 +182,46 @@
         $(this).parent().addClass('selected');
         $('.selected').remove();
     });
+
+    $(document).on("click", ".plus", function () {
+        
+        $('.sticky').removeClass('selected');
+        $(this).parent().addClass('selected');
+        
+        var width = parseInt($(".selected").css('width'));
+        var height = parseInt($(".selected").css('height'));
+        if(width < 1000){
+            $(".selected").css({'width' : width + 30,'height' : height + 30});
+
+            var s_img = $(".selected").children('img');
+            var width = parseInt(s_img.css('width'));
+            var height = parseInt(s_img.css('height'));
+            s_img.css({'width' : width + 30,'height' : height + 30});
+            console.log(width + 30)
+        }
+        
+    });
+
+    $(document).on("click", ".minus", function () {
+
+        $('.sticky').removeClass('selected');
+        $(this).parent().addClass('selected');
+
+        var width = parseInt($(".selected").css('width'));
+        var height = parseInt($(".selected").css('height'));
+        if(width > 90){
+            $(".selected").css({'width' : width - 30,'height' : height - 30});
+            var s_img = $(".selected").children('img');
+            var width = parseInt(s_img.css('width'));
+            var height = parseInt(s_img.css('height'));
+            s_img.css({'width' : width - 30,'height' : height - 30});
+            console.log(width - 30)
+
+        }  
+        
+    });
+
+
 
     
 
@@ -388,7 +430,7 @@
     })
 
 
-        // var tokenID = document.getElementById('tokenID');
+    // var tokenID = document.getElementById('tokenID');
 
     // $(document).on("click", "#test", function () {
     //     test(tokenID.value);
