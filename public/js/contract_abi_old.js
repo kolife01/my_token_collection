@@ -96,11 +96,11 @@ var contractABI = [
 		"inputs": [
 			{
 				"indexed": true,
-				"name": "previousOwner",
+				"name": "account",
 				"type": "address"
 			}
 		],
-		"name": "OwnershipRenounced",
+		"name": "MinterAdded",
 		"type": "event"
 	},
 	{
@@ -123,47 +123,6 @@ var contractABI = [
 			}
 		],
 		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "previousOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "OwnershipTransferred",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "MinterAdded",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "MinterRemoved",
 		"type": "event"
 	},
 	{
@@ -195,10 +154,22 @@ var contractABI = [
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "MinterRemoved",
+		"type": "event"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_tokenURI",
+				"name": "_uri",
 				"type": "string"
 			}
 		],
@@ -246,8 +217,21 @@ var contractABI = [
 	},
 	{
 		"constant": false,
-		"inputs": [],
-		"name": "renounceOwnership",
+		"inputs": [
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "safeTransferFrom",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -271,28 +255,6 @@ var contractABI = [
 			{
 				"name": "_data",
 				"type": "bytes"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"name": "tokenId",
-				"type": "uint256"
 			}
 		],
 		"name": "safeTransferFrom",
@@ -336,20 +298,6 @@ var contractABI = [
 			}
 		],
 		"name": "transferFrom",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -444,20 +392,6 @@ var contractABI = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "isOwner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
 		"name": "mintingFinished",
 		"outputs": [
 			{
@@ -477,20 +411,6 @@ var contractABI = [
 			{
 				"name": "",
 				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
 			}
 		],
 		"payable": false,
@@ -624,4 +544,6 @@ var contractABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+	
+	
+  ]

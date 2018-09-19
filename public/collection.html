@@ -47,7 +47,7 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="https://opensea.io/category/mytokencollection">Market</a>
+                        <a class="page-scroll" href="https://opensea.io/category/mytokencollectionv2">Market</a>
 					          </li>		
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -108,8 +108,8 @@
     let userAccount;
 
     async function startApp(){
-        // var contractAddress = "0x47b7C92e2f14C83645075edB56527534E0D31782";
-        var contractAddress = "0xC3d3916FAe7C2b7519C79Fa3A09E08FB1F42a800";
+        // var contractAddress = "0xC5F02d4e052659BDa68E8685ec437eF98b4E2B00";
+        var contractAddress = "0xb763Dd5CF99B56a75f4Ff8809d5afb162B01430C";
         contract = new web3js.eth.Contract(contractABI, contractAddress);
         const result = await sampleResolve();
         await getToken(result);
